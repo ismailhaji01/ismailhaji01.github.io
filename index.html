@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Ismail Ali Haji — Technical Lead, Payments & Integrations">
+<meta property="og:description" content="Payment gateways, mobile money and bank integrations, POS and telematics systems in Tanzania.">
+<meta property="og:url" content="https://ismailhaji01.github.io/">
+<title>Ismail Ali Haji</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Ismail Ali Haji — Technical Lead building payment gateways, mobile money integrations and secure backend systems in Tanzania.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+img{max-width:100%}
+[hidden]{display:none!important}
+/* Layout: one left-aligned column (max 1080px). Hero pairs a statement with a payment "trace";
+   work reads like a ledger of systems, each with a status chip. */
+:root {
+  --bg: #F3F6F5;
+  --surface: #FFFFFF;
+  --ink: #0E1B1E;
+  --muted: #55666A;
+  --line: #D6DFDD;
+  --green: #0B6B52;      /* primary accent: settled / live */
+  --green-soft: #DDEFE8;
+  --amber: #B7791F;      /* secondary accent: pending / in progress */
+  --amber-soft: #FBEFD9;
+  --code-bg: #0F1F22;
+  --code-fg: #CFE3DD;
+  --code-dim: #6E8A85;
+  --code-green: #5FD3A8;
+  --code-amber: #F2C063;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1416; --surface: #111D20; --ink: #E4ECEA; --muted: #92A6A2; --line: #22353A;
+    --green: #4CC79B; --green-soft: #133029; --amber: #EDB54F; --amber-soft: #33270F;
+    --code-bg: #071012; --code-fg: #CFE3DD; --code-dim: #5D7873; --code-green: #5FD3A8; --code-amber: #F2C063;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1416; --surface: #111D20; --ink: #E4ECEA; --muted: #92A6A2; --line: #22353A;
+  --green: #4CC79B; --green-soft: #133029; --amber: #EDB54F; --amber-soft: #33270F;
+  --code-bg: #071012; --code-fg: #CFE3DD; --code-dim: #5D7873; --code-green: #5FD3A8; --code-amber: #F2C063;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Top bar */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.brand { font-family: var(--f-display); font-weight: 700; font-size: 18px; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.brand span { color: var(--green); }
+.nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+.nav a:hover { color: var(--ink); }
+@media (max-width: 640px) { .nav { display: none; } }
+
+/* Hero */
+.hero { padding-block: 64px 48px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
+.hero > * { min-width: 0; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; color: var(--muted); letter-spacing: 0.04em; display: flex; align-items: center; gap: 8px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px var(--green-soft); flex: none; }
+h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(38px, 5.4vw, 60px); line-height: 1.04; letter-spacing: -0.025em; margin: 16px 0 18px; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--green); }
+.lede { font-size: 18px; color: var(--muted); max-width: 34em; margin: 0 0 28px; }
+.lede strong { color: var(--ink); font-weight: 600; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; font: 600 15px/1 var(--f-body); padding: 13px 18px; border-radius: 8px; text-decoration: none; border: 1px solid var(--line); color: var(--ink); background: var(--surface); cursor: pointer; }
+.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn:hover { border-color: var(--green); }
+.btn svg { width: 16px; height: 16px; flex: none; }
+
+/* Trace card: a payment moving through the system */
+.trace { background: var(--code-bg); color: var(--code-fg); border-radius: 12px; padding: 20px 22px; font-family: var(--f-mono); font-size: 13px; line-height: 1.75; overflow-x: auto; box-shadow: 0 24px 60px -30px rgba(5, 30, 25, 0.55); }
+.trace-head { display: flex; justify-content: space-between; color: var(--code-dim); font-size: 12px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #24403f; gap: 12px; }
+.trace .row { display: grid; grid-template-columns: 64px 1fr; gap: 10px; white-space: nowrap; }
+.trace .t { color: var(--code-dim); font-variant-numeric: tabular-nums; }
+.trace .k { color: var(--code-amber); }
+.trace .ok { color: var(--code-green); }
+.trace .step { opacity: 0; animation: in 0.4s ease forwards; }
+.trace .step:nth-child(2) { animation-delay: .15s } .trace .step:nth-child(3) { animation-delay: .5s }
+.trace .step:nth-child(4) { animation-delay: .85s } .trace .step:nth-child(5) { animation-delay: 1.2s }
+.trace .step:nth-child(6) { animation-delay: 1.55s } .trace .step:nth-child(7) { animation-delay: 1.9s }
+@keyframes in { from { opacity: .25; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+.trace-foot { margin-top: 12px; padding-top: 10px; border-top: 1px dashed #24403f; display: flex; justify-content: space-between; gap: 12px; color: var(--code-dim); font-size: 12px; }
+.trace-foot b { color: var(--code-green); font-weight: 500; }
+
+@media (max-width: 860px) { .hero { grid-template-columns: 1fr; padding-block: 40px 32px; gap: 32px; } }
+@media (max-width: 520px) { .trace { font-size: 12px; padding: 16px; } .trace .row { white-space: normal; grid-template-columns: 52px 1fr; } }
+
+/* Networks strip */
+.networks { border-block: 1px solid var(--line); background: var(--surface); }
+.networks .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; padding-block: 16px; }
+.networks .label { font-family: var(--f-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px; }
+.networks .n { font-weight: 600; font-size: 14px; color: var(--ink); white-space: nowrap; }
+
+/* Sections */
+section.block { padding-block: 72px 8px; scroll-margin-top: 64px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+h2 { font-family: var(--f-display); font-weight: 700; font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -0.02em; line-height: 1.1; margin: 0; text-wrap: balance; }
+.sec-note { color: var(--muted); font-size: 15px; max-width: 36em; margin: 0; }
+
+/* About */
+.about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; }
+.about > * { min-width: 0; }
+.about p { margin: 0 0 16px; max-width: 62ch; }
+.facts { margin: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.facts div { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.facts dt { font-family: var(--f-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; padding-top: 3px; }
+.facts dd { margin: 0; font-weight: 500; }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: 28px; } }
+
+/* Work ledger */
+.ledger { display: grid; gap: 0; border-top: 2px solid var(--ink); }
+.entry { display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+.entry > * { min-width: 0; }
+.entry .meta { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.ref { font-family: var(--f-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--f-mono); font-size: 11.5px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; }
+.chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.chip.live { color: var(--green); background: var(--green-soft); }
+.chip.build { color: var(--amber); background: var(--amber-soft); }
+.chip.public { color: var(--muted); background: transparent; border: 1px solid var(--line); }
+.chip.public::before { display: none; }
+.entry h3 { font-family: var(--f-display); font-weight: 700; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 8px; line-height: 1.2; }
+.entry .what { margin: 0 0 14px; color: var(--ink); max-width: 66ch; }
+.entry ul { margin: 0 0 16px; padding-left: 18px; color: var(--muted); max-width: 70ch; }
+.entry li { margin-bottom: 6px; }
+.entry li::marker { color: var(--green); }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; }
+.stack span { font-family: var(--f-mono); font-size: 12px; padding: 3px 8px; border-radius: 4px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); }
+.repo { font-family: var(--f-mono); font-size: 12.5px; color: var(--muted); }
+@media (max-width: 760px) { .entry { grid-template-columns: 1fr; gap: 14px; } .entry .meta { flex-direction: row; flex-wrap: wrap; align-items: center; } }
+
+/* Experience timeline */
+.timeline { display: grid; gap: 0; }
+.job { display: grid; grid-template-columns: 150px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid var(--line); }
+.job > * { min-width: 0; }
+.job .when { font-family: var(--f-mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 4px; }
+.job h3 { font-size: 18px; font-weight: 600; margin: 0; line-height: 1.35; }
+.job .org { color: var(--muted); font-weight: 400; }
+.job p { margin: 6px 0 0; color: var(--muted); max-width: 70ch; }
+.job.now .when { color: var(--green); }
+@media (max-width: 640px) { .job { grid-template-columns: 1fr; gap: 4px; } }
+
+/* Project grid */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: var(--ink); transition: border-color .15s, transform .15s; }
+.card:hover { border-color: var(--green); transform: translateY(-2px); }
+.card h3 { font-family: var(--f-display); font-size: 19px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+.card p { margin: 0; color: var(--muted); font-size: 15px; flex: 1; }
+.card .foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.card .foot .arrow { color: var(--green); }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
+.skill { padding: 18px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 140px 1fr; gap: 16px; }
+.skill > * { min-width: 0; }
+.skill h3 { margin: 0; font-size: 15px; font-weight: 600; }
+.skill p { margin: 0; color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) { .skills { grid-template-columns: 1fr; } .skill { grid-template-columns: 1fr; gap: 4px; } }
+
+/* Education */
+.edu { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.edu div { padding: 20px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
+.edu .ref { display: block; margin-bottom: 8px; }
+.edu h3 { margin: 0 0 4px; font-size: 16px; font-weight: 600; line-height: 1.35; }
+.edu p { margin: 0; color: var(--muted); font-size: 14.5px; }
+@media (max-width: 760px) { .edu { grid-template-columns: 1fr; } }
+
+/* Contact */
+.contact { margin-block: 80px 0; background: var(--ink); color: var(--bg); }
+.contact .wrap { padding-block: 64px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: end; }
+.contact .wrap > * { min-width: 0; }
+.contact h2 { color: var(--bg); font-size: clamp(30px, 4vw, 46px); }
+.contact p { color: color-mix(in srgb, var(--bg) 70%, var(--ink)); margin: 14px 0 0; max-width: 34em; }
+.lines { display: grid; gap: 0; }
+.line { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid color-mix(in srgb, var(--bg) 20%, var(--ink)); }
+.line .lab { font-family: var(--f-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: color-mix(in srgb, var(--bg) 60%, var(--ink)); flex: none; }
+.line .val { font-weight: 500; color: var(--bg); text-align: right; overflow-wrap: anywhere; user-select: all; }
+.line a.val { text-decoration: none; user-select: auto; }
+.line a.val:hover { text-decoration: underline; }
+.copy { background: transparent; border: 1px solid color-mix(in srgb, var(--bg) 35%, var(--ink)); color: var(--bg); font: 500 12px var(--f-mono); padding: 5px 9px; border-radius: 6px; cursor: pointer; flex: none; }
+.copy:hover { border-color: var(--bg); }
+@media (max-width: 760px) { .contact .wrap { grid-template-columns: 1fr; padding-block: 48px; } }
+footer { background: var(--ink); color: color-mix(in srgb, var(--bg) 55%, var(--ink)); font-family: var(--f-mono); font-size: 12px; }
+footer .wrap { padding-block: 0 28px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Ismail Ali Haji<span>.</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow"><span class="dot" aria-hidden="true"></span>Technical Lead · EvMak Tanzania · Dar es Salaam</div>
+      <h1>I build the systems that move <em>payments</em> and <em>data</em> across Tanzania.</h1>
+      <p class="lede">I lead engineering for EvMak's payment platforms: a gateway that connects <strong>mobile money networks and banks</strong> through one API, a palm-vein point-of-sale app, and middleware that forwards <strong>vehicle tracking data to LATRA</strong>. I trained in cybersecurity and digital forensics, so security is part of every design.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#work">See my work</a>
+        <a class="btn" href="https://github.com/ismailhaji01" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+        <a class="btn" href="Ismail_Ali_Haji_CV.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13M6.5 8.5h4M6.5 11h4"/></svg>
+          CV (PDF)
+        </a>
+      </div>
+    </div>
+
+    <figure class="trace" aria-label="Example of a mobile money payment moving through the gateway" style="margin:0">
+      <div class="trace-head"><span>evpay · sample transaction</span><span>TZS</span></div>
+      <div class="row step"><span class="t">00.000</span><span><span class="k">POST</span> /pay  network=<span class="k">M-Pesa</span>  amount=25,000</span></div>
+      <div class="row step"><span class="t">00.004</span><span>merchant verified · request accepted</span></div>
+      <div class="row step"><span class="t">00.006</span><span>router → <span class="k">Vodacom</span> module · USSD push sent</span></div>
+      <div class="row step"><span class="t">00.912</span><span>customer prompt on 2557•• ••• •12</span></div>
+      <div class="row step"><span class="t">14.380</span><span>callback received · <span class="ok">SUCCESS</span></span></div>
+      <div class="row step"><span class="t">14.383</span><span>merchant notified · ledger updated</span></div>
+      <div class="row step"><span class="t">EOD</span><span>reconciled with network statement <span class="ok">✓</span></span></div>
+      <div class="trace-foot"><span>if no callback → status query + retry</span><b>settled</b></div>
+    </figure>
+  </div>
+
+  <div class="networks" aria-label="Networks and banks integrated">
+    <div class="wrap">
+      <span class="label">Integrated with</span>
+      <span class="n">M-Pesa</span><span class="n">Mixx by Yas</span><span class="n">Airtel Money</span><span class="n">HaloPesa</span>
+      <span class="n">CRDB</span><span class="n">NBC</span><span class="n">NMB</span><span class="n">Selcom</span><span class="n">CyberSource</span><span class="n">TANQR</span><span class="n">LATRA</span>
+    </div>
+  </div>
+
+  <section class="block wrap" id="about" aria-labelledby="about-h">
+    <div class="about">
+      <div>
+        <div class="sec-head"><h2 id="about-h">About</h2></div>
+        <p>I'm a software engineer and technical lead based in Dar es Salaam. Most of my work sits where money, devices and regulators meet: mobile money pushes and payouts, bank control numbers and card payments, biometric point-of-sale terminals, and vehicle telematics data that has to reach the regulator on time.</p>
+        <p>I own these systems end to end. I design the architecture, write the code in Laravel, Go and Kotlin, run production on Linux with Docker and Traefik, and work through integrations with each network's and bank's technical team until they go live.</p>
+        <p>Before EvMak I built secure web applications at the e-Government Authority and examined devices in cybercrime cases at Tanzania Police Headquarters. That background is why I care about authentication, audit logs and failure handling as much as features.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Role</dt><dd>Technical Lead, EvMak Tanzania</dd></div>
+        <div><dt>Focus</dt><dd>Payments, integrations, backend, security</dd></div>
+        <div><dt>Languages</dt><dd>PHP, Go, Kotlin, JavaScript, Python, Solidity</dd></div>
+        <div><dt>Degree</dt><dd>BSc Cyber Security &amp; Digital Forensic Engineering, UDOM</dd></div>
+        <div><dt>Based in</dt><dd>Dar es Salaam, Tanzania</dd></div>
+        <div><dt>Speaks</dt><dd>Kiswahili, English</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="block wrap" id="work" aria-labelledby="work-h">
+    <div class="sec-head">
+      <h2 id="work-h">Selected work</h2>
+      <p class="sec-note">Production systems I lead at EvMak. Most of the code is private; I can walk through the architecture in an interview.</p>
+    </div>
+
+    <div class="ledger">
+      <article class="entry">
+        <div class="meta"><span class="ref">01 · Payments</span><span class="chip live">Live</span></div>
+        <div>
+          <h3>EvPay Payment Gateway</h3>
+          <p class="what">One API that lets merchants collect and pay out across Tanzania's mobile money networks and banks, so they integrate once instead of separately with each provider.</p>
+          <ul>
+            <li>Modular design with a separate module for each provider: Vodacom M-Pesa, Mixx by Yas (Tigo), Airtel Money, HaloPesa, CRDB, NBC and NMB.</li>
+            <li>Supports USSD push, C2B, biller and payout (B2C) flows, plus bank control numbers and card payments.</li>
+            <li>A provider router sends each request to the right network. Each network has its own log, and queued status checks catch payments whose callback never arrives.</li>
+          </ul>
+          <div class="stack"><span>Laravel 12</span><span>PHP 8.2</span><span>Redis queues</span><span>MySQL</span><span>SOAP / REST</span><span>Supervisor</span></div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="meta"><span class="ref">02 · Performance</span><span class="chip live">Live</span></div>
+        <div>
+          <h3>EvPay Go transaction service</h3>
+          <p class="what">A Go service for EvPay's transaction API, built for high throughput and to keep running without manual intervention.</p>
+          <ul>
+            <li>A worker pool and job queue process transactions concurrently, with drop and throughput statistics for monitoring.</li>
+            <li>Provider clients for M-Pesa, Mixx by Yas, Airtel Money and HaloPesa, with token caching and automatic retries.</li>
+            <li>Reconciliation endpoint with SMS alerts, a systemd watchdog that checks database health, and graceful shutdown.</li>
+          </ul>
+          <div class="stack"><span>Go 1.23</span><span>net/http</span><span>MySQL</span><span>systemd</span><span>Apache proxy</span><span>Docker</span></div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="meta"><span class="ref">03 · Point of sale</span><span class="chip build">In development</span></div>
+        <div>
+          <h3>Palm POS merchant app</h3>
+          <p class="what">An Android app for a smart POS terminal that lets customers pay with their palm, a card, a QR code, mobile money or cash.</p>
+          <ul>
+            <li>Palm-vein enrolment and palm-scan payment, with card payments by chip, swipe and NFC.</li>
+            <li>TANQR scanning, mobile money and cash payments, with printed or digital receipts.</li>
+            <li>Products, orders, customers, employees and sessions, with OTP sign-in and Firebase push notifications.</li>
+          </ul>
+          <div class="stack"><span>Kotlin</span><span>Jetpack Compose</span><span>Retrofit</span><span>Coroutines</span><span>Firebase</span><span>NFC / USB</span></div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="meta"><span class="ref">04 · Telematics</span><span class="chip live">Live</span></div>
+        <div>
+          <h3>LATRA vehicle data integration</h3>
+          <p class="what">Middleware that collects data from tracking devices installed in vehicles and forwards it to LATRA (Land Transport Regulatory Authority).</p>
+          <ul>
+            <li>Built with InnovaTECH Solutions Tanzania Limited, which provides telematics, fleet management and fuel intelligence for transport, logistics, mining and oil and gas.</li>
+            <li>Manages traffic from the installed devices so their data reaches LATRA reliably.</li>
+          </ul>
+          <div class="stack"><span>Middleware</span><span>Device data</span><span>REST APIs</span><span>Linux</span></div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="meta"><span class="ref">05 · Billing</span><span class="chip live">Live</span></div>
+        <div>
+          <h3>Traffic gate billing system</h3>
+          <p class="what">Calculates gate tariffs, takes mobile money payments, issues receipts and checks gate passes, with daily reconciliation for operators.</p>
+          <ul>
+            <li>Uses the same middleware layer to manage traffic from gate and vehicle devices.</li>
+            <li>Every gate payment is recorded, so operators can reconcile collections at the end of each day.</li>
+          </ul>
+          <div class="stack"><span>Laravel</span><span>MySQL</span><span>Mobile money</span><span>Middleware</span></div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="meta"><span class="ref">06 · Core banking</span><span class="chip public">Public repo</span></div>
+        <div>
+          <h3>Apache Fineract custom build</h3>
+          <p class="what">A Docker image of Apache Fineract core banking with MySQL driver support, used to run account and settlement operations alongside EvPay.</p>
+          <div class="stack"><span>Apache Fineract</span><span>Docker</span><span>MySQL</span><span>GitLab registry</span></div>
+          <p class="repo" style="margin:12px 0 0"><a href="https://github.com/ismailhaji01/fineract-custom-build" target="_blank" rel="noopener">github.com/ismailhaji01/fineract-custom-build ↗</a></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="block wrap" id="experience" aria-labelledby="exp-h">
+    <div class="sec-head"><h2 id="exp-h">Experience</h2></div>
+    <div class="timeline">
+      <div class="job now">
+        <div class="when">Aug 2025 – now</div>
+        <div><h3>Technical Lead <span class="org">· EvMak Tanzania</span></h3>
+        <p>Lead the engineering team behind EvPay, the LATRA integration, gate billing and Palm POS. Own architecture, code review, releases and production operations.</p></div>
+      </div>
+      <div class="job">
+        <div class="when">Oct 2024 – Jul 2025</div>
+        <div><h3>Software Engineer <span class="org">· e-Government Authority (eGA)</span></h3>
+        <p>Built and maintained secure web applications for government research centres and reviewed code against cybersecurity standards.</p></div>
+      </div>
+      <div class="job">
+        <div class="when">Dec 2023 – Feb 2024</div>
+        <div><h3>Web eCommerce Technician <span class="org">· Shehena E-Commerce</span></h3>
+        <p>Set up and maintained WooCommerce stores, including pricing, inventory, shipping and tax rules.</p></div>
+      </div>
+      <div class="job">
+        <div class="when">Jul – Oct 2023</div>
+        <div><h3>Cyber Security &amp; Forensics (attachment) <span class="org">· Tanzania Police Headquarters</span></h3>
+        <p>Examined phones and computers in cybercrime cases using Cellebrite, FTK Imager and MOBILedit, and reported findings to investigators.</p></div>
+      </div>
+      <div class="job">
+        <div class="when">Jul – Sep 2022</div>
+        <div><h3>ICT Industrial Trainee <span class="org">· University of Dodoma</span></h3>
+        <p>Configured secure servers and mail, ran vulnerability assessments, and set up network, CCTV and VoIP systems.</p></div>
+      </div>
+      <div class="job">
+        <div class="when">2019 – 2023</div>
+        <div><h3>Webmaster &amp; ICT Instructor <span class="org">· Zanzibar Commercial Secondary School</span></h3>
+        <p>Ran the school website and taught web development and programming to O-Level and A-Level students.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="projects" aria-labelledby="proj-h">
+    <div class="sec-head">
+      <h2 id="proj-h">Other projects</h2>
+      <p class="sec-note">Earlier and personal projects, mostly from university, with code on GitHub.</p>
+    </div>
+    <div class="grid">
+      <a class="card" href="https://github.com/ismailhaji01/votechain" target="_blank" rel="noopener">
+        <h3>VoteChain</h3>
+        <p>Blockchain voting system with Ethereum smart contracts so each vote is recorded and cannot be changed.</p>
+        <div class="foot"><span>Solidity · Truffle · Node.js</span><span class="arrow">↗</span></div>
+      </a>
+      <a class="card" href="https://github.com/ismailhaji01/AgriSupply-Chain" target="_blank" rel="noopener">
+        <h3>AgriSupply Chain</h3>
+        <p>Supply chain tracker that records orders, shipments and products on-chain between suppliers, retailers and buyers.</p>
+        <div class="foot"><span>Solidity · Next.js · TypeScript</span><span class="arrow">↗</span></div>
+      </a>
+      <a class="card" href="https://github.com/ismailhaji01/LOGIN-AUTHENTICATION" target="_blank" rel="noopener">
+        <h3>Secure Login Authentication</h3>
+        <p>A hardened login system for student management platforms, built to close common authentication weaknesses.</p>
+        <div class="foot"><span>React · Spring Boot · MySQL</span><span class="arrow">↗</span></div>
+      </a>
+      <a class="card" href="https://github.com/ismailhaji01/eRail" target="_blank" rel="noopener">
+        <h3>eRail</h3>
+        <p>Online railway reservation system with seat allocation, PNR generation and booking checks in stored procedures.</p>
+        <div class="foot"><span>PHP · MySQL</span><span class="arrow">↗</span></div>
+      </a>
+      <a class="card" href="https://github.com/ismailhaji01/tourism" target="_blank" rel="noopener">
+        <h3>Tour booking platform</h3>
+        <p>Tour package website with booking, reviews, customer accounts and an admin panel for managing packages.</p>
+        <div class="foot"><span>PHP · MySQL</span><span class="arrow">↗</span></div>
+      </a>
+      <a class="card" href="https://github.com/ismailhaji01/Optimizing-Energy-Efficiency-in-Tanzania-s-Oil-and-Gas-Supply-Chain" target="_blank" rel="noopener">
+        <h3>Oil &amp; gas supply chain</h3>
+        <p>Research concept for tracing fuel in Tanzania's supply chain with blockchain and sensors to fight counterfeit and illegal sales.</p>
+        <div class="foot"><span>Blockchain · IoT · Research</span><span class="arrow">↗</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="block wrap" id="skills" aria-labelledby="skills-h">
+    <div class="sec-head"><h2 id="skills-h">Skills</h2></div>
+    <div class="skills">
+      <div class="skill"><h3>Payments</h3><p>Mobile money (USSD push, C2B, B2C, biller), bank control numbers, card payments, TANQR, callbacks, reconciliation, settlement</p></div>
+      <div class="skill"><h3>Backend</h3><p>PHP (Laravel), Go, Node.js, Python, Java (Spring Boot); REST, SOAP, webhooks; queues and workers</p></div>
+      <div class="skill"><h3>Mobile</h3><p>Android with Kotlin and Jetpack Compose, POS hardware (NFC, card readers, printers), Firebase</p></div>
+      <div class="skill"><h3>Infrastructure</h3><p>Linux, Docker, Podman, Traefik, Cloudflare, Apache, systemd, GitLab CI/CD</p></div>
+      <div class="skill"><h3>Data</h3><p>MySQL, MariaDB, PostgreSQL, Redis, database management, migrations and tuning</p></div>
+      <div class="skill"><h3>Security</h3><p>API authentication, OAuth 2.0, Keycloak, vulnerability assessment, penetration testing, digital forensics</p></div>
+      <div class="skill"><h3>Telematics</h3><p>Device data collection, middleware, device traffic management, regulator data integration</p></div>
+      <div class="skill"><h3>Blockchain</h3><p>Solidity, Ethereum, Truffle, smart contract design</p></div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="education" aria-labelledby="edu-h">
+    <div class="sec-head"><h2 id="edu-h">Education &amp; training</h2></div>
+    <div class="edu">
+      <div><span class="ref">2021 – 2025</span><h3>BSc Cyber Security &amp; Digital Forensic Engineering</h3><p>University of Dodoma (UDOM)</p></div>
+      <div><span class="ref">Feb – Mar 2026</span><h3>Database Management Training</h3><p>Deloitte</p></div>
+      <div><span class="ref">2022</span><h3>Cybersecurity Essentials</h3><p>Online course</p></div>
+    </div>
+  </section>
+</main>
+
+<section class="contact" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <div>
+      <h2 id="contact-h">Let's talk about your payments or integration project.</h2>
+      <p>I'm open to technical lead, backend and payments engineering roles, and to consulting on mobile money and bank integrations.</p>
+    </div>
+    <div class="lines">
+      <div class="line"><span class="lab">Email</span><span class="val" id="email">ismailalihaji01@gmail.com</span><button class="copy" type="button" id="copy-email" data-target="email">Copy</button></div>
+      <div class="line"><span class="lab">Phone</span><span class="val">+255 678 021 550</span></div>
+      <div class="line"><span class="lab">GitHub</span><a class="val" href="https://github.com/ismailhaji01" target="_blank" rel="noopener">github.com/ismailhaji01 ↗</a></div>
+      <div class="line"><span class="lab">Location</span><span class="val">Dar es Salaam, Tanzania</span></div>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap"><span>© <span id="yr">2026</span> Ismail Ali Haji</span><span>Built and hosted on GitHub Pages</span></div></footer>
+
+<script>
+  (function () {
+    var y = document.getElementById('yr'); if (y) y.textContent = new Date().getFullYear();
+    document.querySelectorAll('.copy').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var el = document.getElementById(btn.getAttribute('data-target'));
+        var text = el ? el.textContent.trim() : '';
+        var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); };
+        var fallback = function () {
+          var r = document.createRange(); r.selectNodeContents(el);
+          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+          btn.textContent = 'Selected';
+        };
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, fallback);
+          } else { fallback(); }
+        } catch (e) { fallback(); }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
