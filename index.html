@@ -9,7 +9,7 @@
 <meta property="og:url" content="https://ismailhaji01.github.io/">
 <title>Ismail Ali Haji</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Ismail Ali Haji, full stack developer in Dar es Salaam. Payment gateways, POS apps, WiFi hotspot billing, business and school management software for Tanzanian businesses.">
+<meta name="description" content="Ismail Ali Haji, full stack developer in Dar es Salaam. Payment gateways, POS and Flutter apps, WiFi hotspot billing, marketplaces, business software and GPS tracking systems for Tanzanian businesses.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -242,6 +242,16 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
 .biz .days span { flex: 1; text-align: center; }
 @media (max-width: 520px) { .biz .dash { grid-template-columns: 1fr; } .biz .side { display: none; } .biz .kpis b { font-size: 14px; } }
 
+/* Marketplace order mock-up */
+.pos .track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin: 4px 0 14px; }
+.pos .track span { font: 10.5px var(--f-mono); color: #8A9692; padding-top: 8px; border-top: 3px solid #DCE3E1; }
+.pos .track .done { color: #0B6B52; border-color: #0B6B52; }
+.pos .track .now { color: #B26A00; border-color: #E8A33C; }
+.pos .items { display: grid; gap: 6px; font-size: 13px; }
+.pos .items div { display: flex; justify-content: space-between; gap: 8px; }
+.pos .items span:last-child { font-variant-numeric: tabular-nums; }
+.pos .items .tot { border-top: 1px dashed #C9D3D0; padding-top: 8px; margin-top: 2px; font-weight: 600; }
+
 /* More systems */
 .more { margin-top: 64px; }
 .more-h { font-family: var(--f-display); font-weight: 600; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 22px; }
@@ -271,7 +281,7 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
 <header class="frame hero" id="home">
   <span class="kicker"><span class="dot" aria-hidden="true"></span>Full stack developer · Dar es Salaam</span>
   <h1>Payment, POS and business software for Tanzanian businesses. <span>Built to run every day.</span></h1>
-  <p class="quote">I'm a full stack developer in Dar es Salaam. I design, build and run payment gateways, POS apps, billing systems and business software, connected to Tanzania's mobile money networks and banks.</p>
+  <p class="quote">I'm a full stack developer in Dar es Salaam. I design, build and run payment gateways, POS and mobile apps, billing systems, marketplaces and business software, connected to Tanzania's mobile money networks and banks.</p>
   <div class="btns">
     <a class="btn solid" href="#work">View work</a>
     <a class="btn" href="#contact">Contact me</a>
@@ -378,20 +388,20 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
       <div class="info">
         <div class="cat"><span class="tag">Business</span></div>
         <h3>Business Management Software</h3>
-        <p class="line">Sales, stock, invoices and staff in one place.</p>
-        <p>Software that runs the daily work of a business. Record sales, track stock, send invoices, manage staff and see the numbers at the end of each day, from a phone or a computer.</p>
-        <div class="keys"><span>Sales</span><span>Stock</span><span>Invoices</span><span>Staff</span><span>Reports</span></div>
-        <div class="for"><b>Good for</b> shops, wholesalers, pharmacies, restaurants and growing companies with more than one branch.</div>
+        <p class="line">Sell, stock, account and report from one system.</p>
+        <p>A back-office web app with a matching Flutter mobile app. It covers sales and POS, stock, purchases, expenses and accounting, plus modules for hotels and for restaurants with a kitchen display screen.</p>
+        <div class="keys"><span>POS and sales</span><span>Stock and purchases</span><span>Expenses and accounting</span><span>Hotel</span><span>Restaurant and kitchen display</span><span>Reports</span></div>
+        <div class="for"><b>Good for</b> shops, wholesalers, pharmacies, hotels, restaurants and companies with more than one branch.</div>
       </div>
       <div class="stage">
         <div class="browser biz" aria-label="Sample business dashboard">
           <div class="chrome"><i></i><i></i><i></i><span>dashboard · sample</span></div>
           <div class="dash">
-            <ul class="side"><li class="on">Overview</li><li>Sales</li><li>Stock</li><li>Invoices</li><li>Staff</li><li>Reports</li></ul>
+            <ul class="side"><li class="on">Overview</li><li>POS</li><li>Stock</li><li>Purchases</li><li>Accounting</li><li>Hotel</li><li>Restaurant</li><li>Reports</li></ul>
             <div class="main">
               <div class="kpis">
                 <div><span>Today's sales</span><b>TZS 1.24M</b></div>
-                <div><span>Invoices due</span><b>8</b></div>
+                <div><span>Open orders</span><b>8</b></div>
                 <div><span>Low stock</span><b class="warn">3 items</b></div>
               </div>
               <div class="bars" aria-hidden="true"><i style="height:38%"></i><i style="height:55%"></i><i style="height:47%"></i><i style="height:72%"></i><i style="height:64%"></i><i style="height:88%"></i><i style="height:70%"></i></div>
@@ -401,17 +411,73 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
         </div>
       </div>
     </article>
+
+    <article class="case">
+      <div class="info">
+        <div class="cat"><span class="tag">Marketplace · Delivery</span></div>
+        <h3>Marketplace and Delivery App</h3>
+        <p class="line">Customers order, agents sell, riders deliver, all in one app.</p>
+        <p>A Flutter app with separate roles for customers, agents and riders, an admin panel with a live map of orders and riders, and a backend that handles catalogue, pricing, procurement, orders, payments and reports. Customers can set up recurring baskets that reorder on a schedule.</p>
+        <div class="keys"><span>Customer, agent and rider roles</span><span>Live order tracking</span><span>Recurring baskets</span><span>Swahili and English</span></div>
+        <div class="for"><b>Good for</b> grocery and farm-produce sellers, wholesalers and any business that delivers to customers.</div>
+      </div>
+      <div class="stage">
+        <div class="pos" aria-label="Sample marketplace order screen">
+          <div class="in">
+            <div class="top"><span>Order #2231</span><span>sample</span></div>
+            <div class="amt" style="font-size:24px">On the way</div>
+            <div class="sub">Rider Juma · 1.2 km away · about 6 min</div>
+            <div class="track" aria-hidden="true">
+              <span class="done">Placed</span><span class="done">Packed</span><span class="now">On the way</span><span>Delivered</span>
+            </div>
+            <div class="items">
+              <div><span>Mchele, 5 kg</span><span>17,500</span></div>
+              <div><span>Mafuta ya kupikia, 3 L</span><span>15,000</span></div>
+              <div><span>Delivery</span><span>2,000</span></div>
+              <div class="tot"><span>Paid with M-Pesa</span><span>TZS 34,500</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="hint">Sample order · Flutter app</div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="info">
+        <div class="cat"><span class="tag">Rental · IoT</span></div>
+        <h3>Power Bank Rental System</h3>
+        <p class="line">Rent a charged power bank from a station and bring it back when you're done.</p>
+        <p>Customers sign in with a one-time SMS code, unlock a power bank from a smart cabinet and pay with mobile money or cash. The system talks to the cabinets through their API, sends return reminders and overdue alerts by SMS, and splits revenue with the shops that host each cabinet.</p>
+        <div class="keys"><span>Smart cabinets</span><span>SMS one-time codes</span><span>Overdue alerts</span><span>Host commissions</span><span>Ads on cabinet screens</span></div>
+        <div class="for"><b>Good for</b> malls, cafés, bus terminals, hospitals and event venues.</div>
+      </div>
+      <div class="stage">
+        <div class="pos" id="rent">
+          <div class="in">
+            <div class="top"><span>Station · City Mall, gate B</span><span>sample</span></div>
+            <div class="amt">6<small>power banks free</small></div>
+            <div class="sub">TZS 1,000 per hour</div>
+            <div class="methods" role="group" aria-label="Rent a power bank">
+              <button type="button" id="r-mm" class="full" data-msg="Code sent by SMS. Push sent to your phone…" data-done="Paid. Slot 4 is open, take your power bank." aria-pressed="false">Rent with mobile money</button>
+              <button type="button" id="r-cash" class="full" data-msg="Show this code to the shop attendant…" data-done="Cash received. Slot 2 is open." aria-pressed="false">Pay cash at the shop</button>
+            </div>
+            <div class="msg" id="rent-state" aria-live="polite">Tap to rent a power bank.</div>
+          </div>
+        </div>
+        <div class="hint">Tap to rent · sample station</div>
+      </div>
+    </article>
   </div>
 
   <div class="more">
     <h3 class="more-h">More systems I build</h3>
     <div class="mgrid">
       <article><span class="tag">Education</span><h4>School Management Software</h4><p>Student records, fee collection by mobile money or control number, results, and SMS updates to parents.</p></article>
-      <article><span class="tag">Transport</span><h4>Vehicle Tracking and LATRA Reporting</h4><p>Middleware that collects data from tracking devices in trucks and buses and sends it to LATRA.</p></article>
+      <article><span class="tag">Transport</span><h4>GPS Tracking Middleware and LATRA Reporting</h4><p>A C# .NET service that receives data from Teltonika tracking devices over TCP and UDP, decodes it, including fuel readings, and forwards it to LATRA. Trucks pay by subscription, and data from unpaid trucks is held back until they pay.</p></article>
+      <article><span class="tag">Entertainment</span><h4>Video Streaming App</h4><p>A Flutter streaming app for Tanzanian films and shows in Swahili and English, with an admin dashboard for publishing content, and a backend that prepares uploaded videos for streaming.</p></article>
       <article><span class="tag">Revenue</span><h4>Gate and Parking Billing</h4><p>Works out the fee for each vehicle, takes mobile money, prints a receipt and gives operators a daily report.</p></article>
       <article><span class="tag">Finance</span><h4>SACCO and Microfinance System</h4><p>Member accounts, loans and repayments on Apache Fineract, with mobile money deposits and withdrawals.</p></article>
       <article><span class="tag">Web</span><h4>Websites and Landing Pages</h4><p>Company websites that explain what you sell, work well on a phone and point visitors to contact you.</p></article>
-      <article><span class="tag">Security</span><h4>Security Review</h4><p>A check of your APIs, logins and servers for the weaknesses attackers use, with a written list of fixes.</p></article>
     </div>
   </div>
 </section>
@@ -430,7 +496,7 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
     <article>
       <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10 18h4"/></svg></div>
       <h3>Mobile apps</h3>
-      <p>Android and iOS apps in Flutter, and Kotlin apps for POS terminals with card readers, NFC and receipt printers.</p>
+      <p>Android and iOS apps in Flutter, from marketplaces and delivery apps to video streaming, and Kotlin apps for POS terminals with card readers and printers.</p>
     </article>
     <article>
       <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 16.5h13l2.5-4H21v4h-2"/><path d="M3 16.5V8h11v8.5"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></div>
@@ -511,7 +577,7 @@ footer { padding-block: 40px 56px; display: flex; justify-content: space-between
     var b = document.getElementById('replay-' + id);
     if (b) b.addEventListener('click', function () { play(el); });
   });
-  [['pos', 'pos-state'], ['hotspot', 'hotspot-state']].forEach(function (pair) {
+  [['pos', 'pos-state'], ['hotspot', 'hotspot-state'], ['rent', 'rent-state']].forEach(function (pair) {
     var box = document.getElementById(pair[0]), state = document.getElementById(pair[1]), timer;
     if (!box || !state) return;
     box.querySelectorAll('button').forEach(function (btn) {
